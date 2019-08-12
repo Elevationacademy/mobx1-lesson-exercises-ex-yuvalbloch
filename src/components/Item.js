@@ -3,23 +3,23 @@ import { observer } from 'mobx-react'
 
 @observer
 class Item extends Component {
-    checkItem = () => {
-        //your code here
+    checkItem = (e) => {
+        this.props.store.checkItem(e.target.value)
+    }
+      editItem = (e) => {
+          this.props.store.editItem(e.target.name)
       }
-      editItem = () => {
-        //your code here
-      }
-      deleteItem = () => {
-        //your code here
+      deleteItem = (e) => {
+        this.props.store.deleteItem(e.target.name)
       }
     render() {
         return (
-            <div className = "">
-      {/*   your code here
-            each item should be in an input checkbox
-            it should display the item name and location
-            it should have both an edit button and a delete button
-      */} 
+            <div className = {this.props.item.completed? "corect" : ""}>
+                <input type="checkbox"  value={this.props.item.name} onClick={this.checkItem}/>
+                {this.props.item.name +"  "}
+                {this.props.item.location}
+                <button  name = {this.props.item.name} onClick={this.editItem}> edit</button>
+                <button  name = {this.props.item.name} onClick={this.deleteItem}>delete</button>
             </div>)
     }
 }
